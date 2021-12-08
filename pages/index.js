@@ -1,15 +1,15 @@
-import Head from 'next/head'
+import Meta from "../components/meta";
+import Header from "../components/header";
+import PopularSection from "../components/popularSection";
+import SearchSection from "../components/searchSection";
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>BNCC Movies</title>
-        <meta name="description" content="BNCC Movies" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>Landing</main>
+      <Meta title="BNCC x tiket Movies" desc="Lorem ipsum" />
+      <Header />
+      <PopularSection />
+      <SearchSection />
     </>
-  )
+  );
 }
