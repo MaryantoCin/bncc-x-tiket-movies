@@ -1,5 +1,5 @@
 import { Container, Text, Box, Grid } from "@chakra-ui/react";
-import Card from "./card";
+import MovieCard from "./movieCard";
 
 const PopularSection = () => {
   return (
@@ -18,31 +18,31 @@ const PopularSection = () => {
           gap={[10, 10, 10, 10, 20]}
           mt={5}
         >
-          <Card
+          <MovieCard
             href="/"
             image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
             title="Venom: Let There Be Carnage"
             textColor="white"
           />
-          <Card
+          <MovieCard
             href="/"
             image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
             title="Venom: Let There Be Carnage"
             textColor="white"
           />
-          <Card
+          <MovieCard
             href="/"
             image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
             title="Venom: Let There Be Carnage"
             textColor="white"
           />
-          <Card
+          <MovieCard
             href="/"
             image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
             title="Venom: Let There Be Carnage"
             textColor="white"
           />
-          <Card
+          <MovieCard
             href="/"
             image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
             title="Venom: Let There Be Carnage"

@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
-import Card from "./card";
+import MovieCard from "./movieCard";
 
 const SearchSection = () => {
   return (
@@ -41,31 +41,31 @@ const SearchSection = () => {
           gap={[10, 10, 10, 10, 20]}
           mt={5}
         >
-          <Card
+          <MovieCard
             href="/"
             image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
             title="Venom: Let There Be Carnage"
             textColor="gray.600"
           />
-          <Card
+          <MovieCard
             href="/"
             image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
             title="Venom: Let There Be Carnage"
             textColor="gray.600"
           />
-          <Card
+          <MovieCard
             href="/"
             image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
             title="Venom: Let There Be Carnage"
             textColor="gray.600"
           />
-          <Card
+          <MovieCard
             href="/"
             image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
             title="Venom: Let There Be Carnage"
             textColor="gray.600"
           />
-          <Card
+          <MovieCard
             href="/"
             image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
             title="Venom: Let There Be Carnage"

@@ -1,7 +1,7 @@
 import { Text, Box, Image } from "@chakra-ui/react";
 import Link from "next/link";
 
-const Card = ({ href = "/", image, title, textColor }) => {
+const MovieCard = ({ href = "/", image, title, textColor }) => {
   return (
     <Link href={href} passHref>
       <Box w="100%" h="300px" cursor="pointer">
@@ -27,4 +27,4 @@ const Card = ({ href = "/", image, title, textColor }) => {
   );
 };
 
-export default Card;
+export default MovieCard;
