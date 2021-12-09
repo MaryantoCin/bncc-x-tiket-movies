@@ -1,7 +1,29 @@
 import { Container, Text, Box, Grid } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { getPopularMovies } from "./api";
 import MovieCard from "./movieCard";
 
 const PopularSection = () => {
+  const [popularMovies, setPopularMovies] = useState([]);
+
+  useEffect(() => {
+    getPopularMovies.then((res) => setPopularMovies(res.data.results));
+  });
+
+  const renderPopularMovies = () => {
+    return popularMovies.map((movie, idx) => {
+      return (
+        <MovieCard
+          key={idx}
+          href="/"
+          image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          title={movie.title}
+          textColor="white"
+        />
+      );
+    });
+  };
+
   return (
     <Box bg="blue.600" py="32px" pt="80px">
       <Container maxW="container.xl">
@@ -18,36 +40,7 @@ const PopularSection = () => {
           gap={[10, 10, 10, 10, 20]}
           mt={5}
         >
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="white"
-          />
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="white"
-          />
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="white"
-          />
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="white"
-          />
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="white"
-          />
+          {popularMovies && renderPopularMovies()}
         </Grid>
       </Container>
     </Box>
