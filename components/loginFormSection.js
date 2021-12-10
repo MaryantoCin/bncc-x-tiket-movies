@@ -17,12 +17,12 @@ Component: FormInput
 Receives: text (the column/input name) and type (the input type)
 This component will show one form column, which includes one label and an input box.
 */
-function InputForm(props) {
+const InputForm = ({text, type}) => {
   return (
     <Flex flexDirection='column' marginBottom='8px'>
-      <FormControl id={props.text.lowercase} color="black">
-        <FormLabel marginBottom='4px' color='#4A5568' fontSize='1rem'>{props.text}</FormLabel>
-        <Input type={props.type} />
+      <FormControl id={text.lowercase} color="black">
+        <FormLabel marginBottom='4px' color='#4A5568' fontSize='1rem'>{text}</FormLabel>
+        <Input type={type} />
       </FormControl>
     </Flex>
   );
@@ -35,7 +35,7 @@ This component will show the login form, which includes:
 - Password Input Form
 - Login Button
 */
-function LoginForm() {
+const LoginForm = () => {
 
   const toast = useToast();
   const toastIdRef = React.useRef();
@@ -84,10 +84,12 @@ function LoginForm() {
   );
 }
 
-export default function LoginFormSection() {
+const LoginFormSection = () => {
   return (
     <Flex flex='1' w='100%' h='100vh' justifyContent='center'>
       <LoginForm />
     </Flex>
   );
 }
+
+export default LoginFormSection;

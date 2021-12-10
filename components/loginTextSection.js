@@ -4,12 +4,13 @@ import {
   Center,
 } from '@chakra-ui/react'
 import Link from 'next/link'
+import { ChevronLeftIcon } from '@chakra-ui/icons'
 
 /*
 Component: LoginTitle
 This component will show the text "Login ke akun BNCC x tiket Movies" on the left part of the login view.
 */
-function LoginTitle() {
+const LoginTitle = () => {
   return (
     <Box fontSize='1.6rem' lineHeight='2.4rem' alignSelf='center'>
       <Text>
@@ -23,32 +24,21 @@ function LoginTitle() {
 }
 
 /*
-Component: FAIcon
-Receives: icon name
-This component will display a FontAwesome icon with the corresponding icon name.
-*/
-function FAIcon(props) {
-  return (
-    <i class={"fa fa-" + props.name}></i>
-  );
-}
-
-/*
 Component: LinkElement
 Receives: link and element
 This component will display an element, that when clicked will open the given link.
 */
-function LinkElement(props) {
+const LinkElement = ({link, title, element}) => {
   return (
-    <Link href={props.link}>
-      <a title={props.title}>
-        {props.element}
+    <Link href={link}>
+      <a title={title}>
+        {element}
       </a>
     </Link>
   );
 }
 
-export default function LoginTextSection() {
+const LoginTextSection = () => {
   return (
     <Center flex='1' w='100%' h='100vh' bg='blue.600'>
       <LinkElement 
@@ -56,10 +46,12 @@ export default function LoginTextSection() {
         title="Kembali ke beranda"
         element={(
           <Text position="absolute" top="64px" left="64px" fontSize="1rem">
-          <FAIcon name="angle-left"/> Kembali ke beranda
+          <ChevronLeftIcon /> Kembali ke beranda
           </Text>
         )}/>
       <LoginTitle />
     </Center>
   );
 }
+
+export default LoginTextSection;
