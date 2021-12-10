@@ -41,7 +41,7 @@ This component will display an element, that when clicked will open the given li
 function LinkElement(props) {
   return (
     <Link href={props.link}>
-      <a title={props.link}>
+      <a title={props.title}>
         {props.element}
       </a>
     </Link>
@@ -53,6 +53,7 @@ export default function LoginTextSection() {
     <Center flex='1' w='100%' h='100vh' bg='blue.600'>
       <LinkElement 
         link="/"
+        title="Kembali ke beranda"
         element={(
           <Text position="absolute" top="64px" left="64px" fontSize="1rem">
           <FAIcon name="angle-left"/> Kembali ke beranda
