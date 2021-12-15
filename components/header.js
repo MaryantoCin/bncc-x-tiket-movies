@@ -3,11 +3,11 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <Box position="fixed" as="nav" w="100%" zIndex={1} bg="white" py={2}>
+    <Box position="fixed" as="nav" w="100%" zIndex={1} bg="white">
       <Container
         display="flex"
-        p={2}
-        maxW="container.xl"
+        py={6}
+        maxW="container.lg"
         alignItems="center"
         justify="space-between"
       >
