@@ -10,7 +10,34 @@ import {
   CloseButton,
   useToast
 } from '@chakra-ui/react'
+
 import { WarningIcon } from '@chakra-ui/icons'
+
+/*
+Reusable and Exportable Function: showToast and closeToast.
+*/
+export function showToast(toast, toastIdRef, {title, description, status, duration, isClosable}) {
+  toast.close(toastIdRef.current);
+  toastIdRef.current = toast({
+    title: title,
+    description: description,
+    status: status,
+    duration: duration,
+    isClosable: isClosable,
+    render: () => (
+      <Box position="relative" padding='12px 36px 12px 48px' color='gray.700' bg='red.100' lineheight="16px" borderRadius='6px'>
+        <WarningIcon position="absolute" top="16px" left="16px" color="red.500"/>
+        <CloseButton position="absolute" top="12px" right="12px" size='sm' onClick={() => closeToast(toast, toastIdRef)}/>
+        <Text fontWeight='bold'>{ title }</Text>
+        <Text>{ description }</Text>
+      </Box>
+    ),
+  })
+}
+
+export function closeToast(toast, toastIdRef) {
+  toast.close(toastIdRef.current);
+}
 
 /*
 Component: FormInput
@@ -36,35 +63,11 @@ This component will show the login form, which includes:
 - Login Button
 */
 const LoginForm = () => {
-
   const toast = useToast();
   const toastIdRef = React.useRef();
 
-  function closeToast() {
-    console.log("Test");
-    toast.close(toastIdRef.current);
-  }
-
-  function showToast(title, description, status) {
-    toastIdRef.current = toast({
-      title: title,
-      description: description,
-      status: status,
-      duration: 3000,
-      isClosable: true,
-      render: () => (
-        <Box position="relative" padding='12px 36px 12px 48px' color='gray.700' bg='red.100' lineheight="16px" borderRadius='6px'>
-          <WarningIcon position="absolute" top="16px" left="16px" color="red.500"/>
-          <CloseButton position="absolute" top="12px" right="12px" size='sm' onClick={() => closeToast()}/>
-          <Text fontWeight='bold'>{ title }</Text>
-          <Text>{ description }</Text>
-        </Box>
-      ),
-    })
-  }
-
   function authenticate() {
-    showToast('Login gagal', 'Username atau password salah', 'error');
+    showToast(toast, toastIdRef, {title:'Login gagal', description:'Username atau password salah', status:'error', duration:3000, isClosable:true});
   }
 
   return (
