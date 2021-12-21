@@ -12,8 +12,43 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 
 import MovieCard from "./movieCard";
+import { api } from "./api";
+import { useEffect, useState } from "react";
 
 const SearchSection = () => {
+  const [input, setInput] = useState("");
+  const [query, setQuery] = useState("!");
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    api
+      .get("search/movie", { params: { query: query } })
+      .then((res) => setMovies(res.data.results));
+  }, [query]);
+
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleInputSubmit = () => {
+    setQuery(input || "!");
+  };
+
+  const renderSearchResults = () => {
+    return movies.map((movie, idx) => {
+      console.log(movie);
+      return (
+        <MovieCard
+          key={movie.id}
+          href={`movie/${movie.id}`}
+          image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          title={movie.title}
+          textColor="gray.600"
+        />
+      );
+    });
+  };
+
   return (
     <Box py="32px" pb="64px">
       <Container maxW="container.xl">
@@ -25,8 +60,13 @@ const SearchSection = () => {
             <InputLeftElement pointerEvents="none">
               <SearchIcon color="gray.300" />
             </InputLeftElement>
-            <Input type="search" placeholder="Search film" mr={1} />
-            <Button px={6} colorScheme="blue">
+            <Input
+              type="search"
+              placeholder="Search film"
+              mr={1}
+              onChange={handleInputChange}
+            />
+            <Button px={6} colorScheme="blue" onClick={handleInputSubmit}>
               Cari
             </Button>
           </InputGroup>
@@ -41,36 +81,7 @@ const SearchSection = () => {
           gap={[10, 10, 10, 10, 20]}
           mt={5}
         >
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="gray.600"
-          />
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="gray.600"
-          />
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="gray.600"
-          />
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="gray.600"
-          />
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="gray.600"
-          />
+          {movies && renderSearchResults()}
         </Grid>
       </Container>
     </Box>
