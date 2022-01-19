@@ -20,11 +20,20 @@ const MovieDetail = ({ data, creditsData }) => {
                         borderRadius="md"
                     />
                     <Box ms={{ base: "0px", md: "40px", lg: "80px" }} mt={{ base: "40px", md: "0px" }}>
-                        <Flex align="flex-end">
-                            <Flex align="baseline">
-                                <Text fontSize="3xl" fontWeight="bold">{data.title}</Text>
-                                <Text fontSize="lg" ms={2}>{data.release_date.substring(0, 4)}</Text>
-                            </Flex>
+                        <Flex align="center" justify='space-between'>
+                            <Text
+                                fontSize="3xl"
+                                fontWeight="bold"
+                                maxW={{ base: "60%", sm: "80%" }}
+                            >
+                                {data.title}
+                                <Text
+                                    as='span'
+                                    fontSize="lg"
+                                    fontWeight='normal'
+                                    ms={2}
+                                >{data.release_date.substring(0, 4)}</Text>
+                            </Text>
 
                             <Spacer />
 
@@ -38,7 +47,7 @@ const MovieDetail = ({ data, creditsData }) => {
                 {/* Movie Cast Section */}
                 <Box my={8}>
                     <Text fontWeight="bold" fontSize="4xl">Cast</Text>
-                    <HStack p="10px" spacing="16px" width="100%" overflowX="scroll" align="stretch">
+                    <HStack py="16px" px="8px" spacing="16px" width="100%" overflowX="scroll" align="stretch">
                         {creditsData.cast.map((el) => {
                             return (<CastCard posterURL={el.profile_path} castName={el.name} characterName={el.character}></CastCard>);
                         })}
