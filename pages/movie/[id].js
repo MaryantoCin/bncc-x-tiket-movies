@@ -49,7 +49,11 @@ const MovieDetail = ({ data, creditsData }) => {
                     <Text fontWeight="bold" fontSize="4xl">Cast</Text>
                     <HStack py="16px" px="8px" spacing="16px" width="100%" overflowX="scroll" align="stretch">
                         {creditsData.cast.map((el) => {
-                            return (<CastCard posterURL={el.profile_path} castName={el.name} characterName={el.character}></CastCard>);
+                            return (<CastCard
+                                key={el.id}
+                                posterURL={el.profile_path}
+                                castName={el.name}
+                                characterName={el.character}></CastCard>);
                         })}
                     </HStack>
                 </Box>
