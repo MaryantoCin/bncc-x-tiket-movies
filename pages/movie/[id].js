@@ -16,6 +16,7 @@ const MovieDetail = ({ data, creditsData }) => {
                 {/*  Movie Description Section */}
                 <Flex pt={36} direction={{ base: "column", md: "row" }} align={{ base: "center", md: "flex-start" }}>
                     <Image
+                        alt={data.title}
                         src={"https://www.themoviedb.org/t/p/w300_and_h450_bestv2" + data.poster_path}
                         borderRadius="md"
                     />

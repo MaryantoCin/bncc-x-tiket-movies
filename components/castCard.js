@@ -9,6 +9,7 @@ const CastCard = (props) => {
                 height="175px"
                 objectFit="contain"
                 bgColor="#e4e6e7"
+                alt={props.castName}
             />
             <Box p={2.5}>
                 <Text fontSize="md" fontWeight="bold">{props.castName}</Text>
