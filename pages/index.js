@@ -2,8 +2,15 @@ import Meta from "../components/meta";
 import Header from "../components/header";
 import PopularSection from "../components/popularSection";
 import SearchSection from "../components/searchSection";
+import "redux";
+import { connect } from 'react-redux'
+import Router from 'next/router'
 
-export default function Home() {
+import { mapStateToProps, setSessionId, removeSessionId, mapDispatchToProps } from '../components/redux'
+
+export function Home(props) {
+  console.log("Home: ");
+  console.log(props);
   return (
     <>
       <Meta title="BNCC x tiket Movies" desc="Lorem ipsum" />
@@ -13,3 +20,6 @@ export default function Home() {
     </>
   );
 }
+
+
+export default connect(mapStateToProps, mapDispatchToProps) (Home);
