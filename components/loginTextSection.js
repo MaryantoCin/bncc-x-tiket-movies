@@ -38,7 +38,7 @@ const LinkElement = ({link, title, element}) => {
   );
 }
 
-const LoginTextSection = () => {
+export const LoginTextSection = () => {
   return (
     <Center flex='1' w='100%' h='100vh' bg='blue.600'>
       <LinkElement 
