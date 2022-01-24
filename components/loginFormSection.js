@@ -42,6 +42,7 @@ This component will show the login form, which includes:
 - Password Input Form
 - Login Button
 */
+
 const LoginForm = (props) => {
   const [currentUser, setUser] = useState('null');
   const [currentToken, setToken] = useState(null);
@@ -57,14 +58,12 @@ const LoginForm = (props) => {
       }
     }).then(res => {
       // Step 5: If successful, save the data, and login.
-      console.log(res);
       if(res.status === 200) {
         props.setSessionId(session_id, res.data);
         showToast(toast, toastIdRef, 'Login berhasil!', 'Selamat datang!', 'success', 2000, true);
         Router.push('/');
       }
     }).catch(e => {
-      console.log(e);
     });
   }
 
@@ -77,7 +76,6 @@ const LoginForm = (props) => {
 
       // Step 4: If successful...
       if(status.data.success === true) {
-        console.log("Get Data: " + status.data.session_id);
         apiGetUserData(status.data.session_id);
       }
     }).catch(e => {
@@ -114,39 +112,15 @@ const LoginForm = (props) => {
       
     });
   }
-
-  function logout(e) {
-    e.preventDefault();
-    if(props.session_id === null)
-      return;
-    api.delete('/authentication/session', {
-      params: {
-        session_id: props.session_id
-      }
-    }).then((res) => {
-      //console.log("Logout")
-      //console.log(res);
-      props.removeSessionId();
-      showToast(toast, toastIdRef, 'Logout berhasil!', 'Sampai jumpa!', 'success', 2000, true);
-      setToken(null);
-      setSession(null);
-    }).catch(e => {
-      //console.log(e);
-    });
-  }
   
   useEffect(() => {
     if(currentSession !== null) {
-      //console.log("TRYING USEEFFECT");
-      //console.log(currentSession);
       api.get('/account', {
         params: {
           session_id: currentSession
         }
       }).then((res) => {
         setUser(res.data.name);
-        //console.log("CURRENT TOKEN");
-        //console.log(res);
       }).catch(e => {
 
       });
@@ -157,39 +131,20 @@ const LoginForm = (props) => {
     <Flex flex='1' w='100%' h='100vh' justifyContent='center'>
       <form style={{height: '100' + '%'}}>
         <Flex w={{base: '50vw', lg: '25vw'}} h='100%' flexDirection='column' justifyContent='center'>
-          <Text color="black">
-            {/* currentUser: {currentUser}<br />
-            currentToken: {currentToken}<br /> 
-            currentToken (REDUX): {props.session_id}*/}
-          </Text>
-          <InputForm text="Username" type="text"/>
-          <InputForm text="Password" type="password"/>
+          <InputForm text="Username" type="text" isDisabled={(props.session_id === null) ? false : true}/>
+          <InputForm text="Password" type="password" isDisabled={(props.session_id === null) ? false : true}/>
           <Button
             colorScheme='blue'
             marginTop='8px'
             onClick={authenticate}
+			      isDisabled={(props.session_id === null) ? false : true}
           >
             Login
           </Button>
-          {/* <Button
-            colorScheme='blue'
-            marginTop='8px'
-            onClick={logout}
-          >
-            Logout
-          </Button> */}
         </Flex>
       </form>
     </Flex>
   );
 }
-
-// export const LoginFormSection = () => {
-//   return (
-//     <Flex flex='1' w='100%' h='100vh' justifyContent='center'>
-//       <LoginForm />
-//     </Flex>
-//   );
-// }
 
 export default connect(mapStateToProps, mapDispatchToProps) (LoginForm);
