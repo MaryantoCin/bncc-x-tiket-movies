@@ -1,29 +1,7 @@
 import { Container, Text, Box, Grid } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { api } from "./api";
 import MovieCard from "./movieCard";
 
-const PopularSection = () => {
-  const [popularMovies, setPopularMovies] = useState([]);
-
-  useEffect(() => {
-    api.get("movie/popular").then((res) => setPopularMovies(res.data.results));
-  }, []);
-
-  const renderPopularMovies = () => {
-    return popularMovies.map((movie, idx) => {
-      return (
-        <MovieCard
-          key={movie.id}
-          href={`movie/${movie.id}`}
-          image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          title={movie.title}
-          textColor="white"
-        />
-      );
-    });
-  };
-
+const PopularSection = ({ popularMoviesData }) => {
   return (
     <Box bg="blue.600" py="32px" pt="80px">
       <Container maxW="container.xl">
@@ -40,7 +18,18 @@ const PopularSection = () => {
           gap={[10, 10, 10, 10, 20]}
           mt={5}
         >
-          {popularMovies && renderPopularMovies()}
+          {popularMoviesData &&
+            popularMoviesData.map((movie, idx) => {
+              return (
+                <MovieCard
+                  key={movie.id}
+                  href={`movie/${movie.id}`}
+                  image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  title={movie.title}
+                  textColor="white"
+                />
+              );
+            })}
         </Grid>
       </Container>
     </Box>
