@@ -9,8 +9,6 @@ import Router from 'next/router'
 import { mapStateToProps, setSessionId, removeSessionId, mapDispatchToProps } from '../components/redux'
 
 export function Home(props) {
-  console.log("Home: ");
-  console.log(props);
   return (
     <>
       <Meta title="BNCC x tiket Movies" desc="Lorem ipsum" />
