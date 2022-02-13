@@ -86,7 +86,17 @@ const LoginForm = (props) => {
           Router.push("/");
         }
       })
-      .catch((e) => {});
+      .catch((e) => {
+        showToast(
+          toast,
+          toastIdRef,
+          "Login gagal!",
+          "Mohon coba lagi...",
+          "error",
+          2000,
+          true
+        );
+      });
   }
 
   function apiNewSession(request_token) {
