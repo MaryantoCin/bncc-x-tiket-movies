@@ -8,6 +8,7 @@ import {
   Input,
   Button,
   Grid,
+  Spinner,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
@@ -19,11 +20,14 @@ const SearchSection = () => {
   const [input, setInput] = useState("");
   const [query, setQuery] = useState("!");
   const [movies, setMovies] = useState([]);
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
-    api
-      .get("search/movie", { params: { query: query } })
-      .then((res) => setMovies(res.data.results));
+    setSpinner(true);
+    api.get("search/movie", { params: { query: query } }).then((res) => {
+      setSpinner(false);
+      setMovies(res.data.results);
+    });
   }, [query]);
 
   const handleInputChange = (e) => {
@@ -36,7 +40,6 @@ const SearchSection = () => {
 
   const renderSearchResults = () => {
     return movies.map((movie, idx) => {
-      console.log(movie);
       return (
         <MovieCard
           key={movie.id}
@@ -47,6 +50,20 @@ const SearchSection = () => {
         />
       );
     });
+  };
+
+  const renderSpinner = () => {
+    return (
+      <Center display="flex" flexDir="column" alignItems="center">
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Center>
+    );
   };
 
   return (
@@ -81,8 +98,9 @@ const SearchSection = () => {
           gap={[10, 10, 10, 10, 20]}
           mt={5}
         >
-          {movies && renderSearchResults()}
+          {movies && !spinner && renderSearchResults()}
         </Grid>
+        {spinner && renderSpinner()}
       </Container>
     </Box>
   );
