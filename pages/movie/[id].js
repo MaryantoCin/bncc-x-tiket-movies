@@ -1,13 +1,16 @@
-import Meta from "../../components/meta";
-import Header from "../../components/header";
-import { Container, Text, Box, Spacer, Flex, Image, Button, HStack, useToast } from "@chakra-ui/react";
-import CastCard from "../../components/castCard";
-import { api } from "../../components/api";
+import { useRouter } from "next/router";
+
 import { connect } from "react-redux";
-import { mapStateToProps } from "../../components/redux";
 import React, { useState, useEffect } from "react";
+import { Container, useToast } from "@chakra-ui/react";
+
+import Meta from "../../components/meta";
+import { api } from "../../components/api";
+import Header from "../../components/header";
 import { showToast } from "../../components/showToast";
-import { useRouter } from "next/router"
+import { mapStateToProps } from "../../components/redux";
+import MovieCastSection from "../../components/movieCastSection";
+import MovieDescriptionSection from "../../components/movieDescriptionSection";
 
 const MovieDetail = ({ movieData, creditsData, session_id }) => {
     const router = useRouter();
@@ -85,9 +88,15 @@ const MovieDetail = ({ movieData, creditsData, session_id }) => {
             })
     }
 
+    // Dijalankan 1x untuk mendapat data favoriteMovies milik user
     useEffect(() => {
         if (session_id) getUserFavoriteMovies();
     }, [])
+
+    // Untuk menghandle state isInFavoriteList ketika user logout di halaman ini 
+    useEffect(() => {
+        if (!session_id) setIsInFavoriteList(null);
+    })
 
     return (
         <>
@@ -97,52 +106,14 @@ const MovieDetail = ({ movieData, creditsData, session_id }) => {
             <Container maxW="container.lg">
 
                 {/*  Movie Description Section */}
-                <Flex pt={36} direction={{ base: "column", md: "row" }} align={{ base: "center", md: "flex-start" }}>
-                    <Image
-                        alt={movieData.title}
-                        src={"https://www.themoviedb.org/t/p/w300_and_h450_bestv2" + movieData.poster_path}
-                        borderRadius="md"
-                    />
-                    <Box ms={{ base: "0px", md: "40px", lg: "80px" }} mt={{ base: "40px", md: "0px" }}>
-                        <Flex align="center" justify='space-between'>
-                            <Text
-                                fontSize="3xl"
-                                fontWeight="bold"
-                                maxW={{ base: "60%", sm: "80%" }}
-                            >
-                                {movieData.title}
-                                <Text
-                                    as='span'
-                                    fontSize="lg"
-                                    fontWeight='normal'
-                                    ms={2}
-                                >{movieData.release_date.substring(0, 4)}</Text>
-                            </Text>
-
-                            <Spacer />
-
-                            <Button colorScheme="blue" size="sm" onClick={favoriteButtonHandler}>
-                                {isInFavoriteList ? "Hapus dari favorit" : "Favoritkan"}
-                            </Button>
-                        </Flex>
-                        <Text fontSize="lg" mt={9}>{movieData.tagline}</Text>
-                        <Text fontSize="sm" mt={9}>{movieData.overview}</Text>
-                    </Box>
-                </Flex>
+                <MovieDescriptionSection
+                    movieData={movieData}
+                    favoriteButtonHandler={favoriteButtonHandler}
+                    isInFavoriteList={isInFavoriteList} />
 
                 {/* Movie Cast Section */}
-                <Box my={8}>
-                    <Text fontWeight="bold" fontSize="4xl">Cast</Text>
-                    <HStack py="16px" px="8px" spacing="16px" width="100%" overflowX="scroll" align="stretch">
-                        {creditsData.cast.map((el) => {
-                            return (<CastCard
-                                key={el.id}
-                                posterURL={el.profile_path}
-                                castName={el.name}
-                                characterName={el.character}></CastCard>);
-                        })}
-                    </HStack>
-                </Box>
+                <MovieCastSection creditsData={creditsData} />
+
             </Container>
         </>
     )
