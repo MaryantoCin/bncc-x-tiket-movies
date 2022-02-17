@@ -12,18 +12,19 @@ import { mapStateToProps } from "../../components/redux";
 import MovieCastSection from "../../components/movieCastSection";
 import MovieDescriptionSection from "../../components/movieDescriptionSection";
 
-const MovieDetail = ({ movieData, creditsData, session_id }) => {
+const MovieDetail = ({ movieData, creditsData, session_id, user_data }) => {
     const router = useRouter();
     const toast = useToast();
     const toastIdRef = React.useRef();
     const [isInFavoriteList, setIsInFavoriteList] = useState(null);
+    console.log(user_data);
 
     const favoriteButtonHandler = async () => {
         // Cek apakah user sudah login (Menerima sessionID dari props)
         // Jika sudah, ketika button diklik akan toggle status favorite movie
         if (session_id) {
             let result = await api.post(
-                `account/{account_id}/favorite?session_id=${session_id}`,
+                `account/${user_data.id}/favorite?session_id=${session_id}`,
                 {
                     "media_type": "movie",
                     "media_id": movieData.id,
