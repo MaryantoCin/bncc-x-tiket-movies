@@ -67,7 +67,7 @@ const MovieDetail = ({ movieData, creditsData, session_id, user_data }) => {
     }
 
     const getUserFavoriteMovies = async () => {
-        await api.get(`/account/{account_id}/favorite/movies?session_id=${session_id}`)
+        await api.get(`/account/${user_data.id}/favorite/movies?session_id=${session_id}`)
             .then(res => {
                 const resData = res.data
                 const IDs = []
