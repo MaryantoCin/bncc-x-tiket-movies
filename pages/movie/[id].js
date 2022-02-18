@@ -17,7 +17,6 @@ const MovieDetail = ({ movieData, creditsData, session_id, user_data }) => {
     const toast = useToast();
     const toastIdRef = React.useRef();
     const [isInFavoriteList, setIsInFavoriteList] = useState(null);
-    console.log(user_data);
 
     const favoriteButtonHandler = async () => {
         // Cek apakah user sudah login (Menerima sessionID dari props)
