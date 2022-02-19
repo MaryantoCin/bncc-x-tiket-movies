@@ -160,7 +160,11 @@ const LoginForm = (props) => {
 	}
 
 	useEffect(() => {
-		setDisable(props.session_id !== null);
+		const condition = props.session_id !== null;
+		setDisable(condition);
+		if (condition === true) {
+			Router.push("/");
+		}
 	}, [props.session_id]);
 
 	return (
