@@ -5,6 +5,7 @@ import {
   Spacer,
   Button,
   useToast,
+	HStack
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { connect } from "react-redux";
@@ -70,21 +71,35 @@ export const Account = (props) => {
     );
 
   return (
-    <Button
-      variant="link"
-      fontSize={[12, 14]}
-      color="gray.700"
-      fontWeight="bold"
-      cursor="pointer"
-      m={0}
-      p={0}
-      _hover={{
-        textDecoration: "none",
-      }}
-      onClick={logout}
-    >
-      Logout
-    </Button>
+		<HStack spacing={["1rem", "2rem"]}>
+			<Link href="/profile" passHref>
+				<Text
+					fontSize={[12, 14]}
+					color="gray.700"
+					fontWeight="bold"
+					cursor="pointer"
+					m={0}
+					p={0}
+				>
+					Profile
+				</Text>
+			</Link>
+			<Button
+				variant="link"
+				fontSize={[12, 14]}
+				color="red.700"
+				fontWeight="bold"
+				cursor="pointer"
+				m={0}
+				p={0}
+				_hover={{
+					textDecoration: "none",
+				}}
+				onClick={logout}
+			>
+				Logout
+			</Button>
+		</HStack>
   );
 };
 
