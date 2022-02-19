@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { connect } from "react-redux";
 import React from "react";
+import Router from "next/router";
 
 import { mapStateToProps, mapDispatchToProps } from "../components/redux";
 import { api } from "./api";
@@ -29,7 +30,7 @@ export const Account = (props) => {
 		})
 			.then((res) => {
 				props.removeSessionId();
-
+				Router.push("/");
 				showToast(
 					toast,
 					toastIdRef,
