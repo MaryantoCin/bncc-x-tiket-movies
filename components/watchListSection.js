@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { api } from "./api";
 import MovieCard from "./movieCard";
 
-const WatchListSection = () => {
+const WatchListSection = ( {session_id, user_data} ) => {
   const [watchList, setWatchList] = useState([]);
 
   useEffect(() => {
-    api.get("account/goldenflash/favorite/movies").then((res) => setWatchList(res.data.results));
+    api.get(`/account/${user_data.username}/favorite/movies?session_id=${session_id}`).then((res) => setWatchList(res.data.results));
   }, []);
 
   const renderWatchList = () => {
