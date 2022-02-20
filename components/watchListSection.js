@@ -3,15 +3,21 @@ import { useEffect, useState } from "react";
 import { api } from "./api";
 import MovieCard from "./movieCard";
 
+import Router from "next/router";
+
 const WatchListSection = ({ session_id, user_data }) => {
   const [watchList, setWatchList] = useState([]);
 
   useEffect(() => {
-    api
-      .get(
-        `/account/${user_data.username}/favorite/movies?session_id=${session_id}`
-      )
-      .then((res) => setWatchList(res.data.results));
+    if (session_id === null) {
+      Router.push("/");
+    } else {
+      api
+        .get(
+          `/account/${user_data?.username}/favorite/movies?session_id=${session_id}`
+        )
+        .then((res) => setWatchList(res.data.results));
+    }
   }, []);
 
   const renderWatchList = () => {

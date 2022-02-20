@@ -16,8 +16,8 @@ const ProfileSection = ({ user_data }) => {
           <WrapItem>
             <Avatar
               size="2xl"
-              name={user_data.username}
-              src={`https://secure.gravatar.com/avatar/${user_data.avatar.gravatar.hash}?s=512`}
+              name={user_data?.username}
+              src={`https://secure.gravatar.com/avatar/${user_data?.avatar.gravatar.hash}?s=512`}
             />{" "}
           </WrapItem>
           <Flex direction={"column"}>
@@ -29,7 +29,7 @@ const ProfileSection = ({ user_data }) => {
                 fontWeight="bold"
                 p="0 10px 0 20px"
               >
-                {user_data.username}
+                {user_data?.username}
               </Text>
             </Flex>
           </Flex>
