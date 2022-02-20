@@ -1,12 +1,34 @@
 import { Container, Text, Box, Grid } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { api } from "./api";
 import MovieCard from "./movieCard";
 
-const WatchListSection = () => {
+const WatchListSection = ( {session_id, user_data} ) => {
+  const [watchList, setWatchList] = useState([]);
+
+  useEffect(() => {
+    api.get(`/account/${user_data.username}/favorite/movies?session_id=${session_id}`).then((res) => setWatchList(res.data.results));
+  }, []);
+
+  const renderWatchList = () => {
+    return watchList.map((movie, idx) => {
+      return (
+        <MovieCard
+          key={movie.id}
+          href={`movie/${movie.id}`}
+          image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          title={movie.title}
+          textColor="black"
+        />
+      );
+    });
+  };
+  
   return (
-    <Box py="32px" pt="80px">
+    <Box bg="white" py="32px" pt="80px">
       <Container maxW="container.xl">
         <Text fontSize={[28, 36]} color="black" fontWeight="bold">
-          My Watch List
+          My Favorite Movies
         </Text>
         <Grid
           templateColumns={[
@@ -18,36 +40,7 @@ const WatchListSection = () => {
           gap={[10, 10, 10, 10, 20]}
           mt={5}
         >
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="white"
-          />
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="white"
-          />
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="white"
-          />
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="white"
-          />
-          <MovieCard
-            href="/"
-            image="https://www.themoviedb.org/t/p/original/aLBiGL6Nqx8nY27X61g6szKn19Y.jpg"
-            title="Venom: Let There Be Carnage"
-            textColor="white"
-          />
+          {watchList && renderWatchList()}
         </Grid>
       </Container>
     </Box>
