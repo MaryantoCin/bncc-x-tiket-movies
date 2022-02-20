@@ -23,19 +23,4 @@ const Profile = ( {session_id, user_data } ) => {
   );
 }
 
-// export async function getServerSideProps(session_id) {
-//   const profileData = await api.get(`/account?session_id=${session_id}`).then((res) => res.data);
-//   console.log(profileData);
-//   console.log(profileData);
-  
-//   if (!profileData) {
-//       return {
-//           notFound: true,
-//       }
-//   }
-//   return {
-//       props: { profileData }
-//   }
-// }
-
 export default connect(mapStateToProps)(Profile);
