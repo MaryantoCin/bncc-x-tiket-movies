@@ -5,14 +5,8 @@ import SearchSection from "../components/searchSection";
 import { api } from "../components/api";
 import "redux";
 import { connect } from "react-redux";
-import Router from "next/router";
 
-import {
-  mapStateToProps,
-  setSessionId,
-  removeSessionId,
-  mapDispatchToProps,
-} from "../components/redux";
+import { mapStateToProps, mapDispatchToProps } from "../components/redux";
 
 export function Home({ popularMoviesData }) {
   return (

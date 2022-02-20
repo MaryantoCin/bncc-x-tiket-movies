@@ -3,11 +3,15 @@ import { useEffect, useState } from "react";
 import { api } from "./api";
 import MovieCard from "./movieCard";
 
-const WatchListSection = ( {session_id, user_data} ) => {
+const WatchListSection = ({ session_id, user_data }) => {
   const [watchList, setWatchList] = useState([]);
 
   useEffect(() => {
-    api.get(`/account/${user_data.username}/favorite/movies?session_id=${session_id}`).then((res) => setWatchList(res.data.results));
+    api
+      .get(
+        `/account/${user_data.username}/favorite/movies?session_id=${session_id}`
+      )
+      .then((res) => setWatchList(res.data.results));
   }, []);
 
   const renderWatchList = () => {
@@ -23,7 +27,7 @@ const WatchListSection = ( {session_id, user_data} ) => {
       );
     });
   };
-  
+
   return (
     <Box bg="white" py="32px" pt="80px">
       <Container maxW="container.xl">

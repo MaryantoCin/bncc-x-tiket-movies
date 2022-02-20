@@ -5,5 +5,5 @@ const BASE_URL = "https://api.themoviedb.org/3";
 
 export const api = axios.create({
   baseURL: BASE_URL,
-  params: { api_key: API_KEY},
+  params: { api_key: API_KEY },
 });

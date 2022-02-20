@@ -1,16 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Flex,
-  FormControl,
-  FormLabel,
-  Input,
-  Button,
-  Box,
-  Text,
-  CloseButton,
-  useToast,
-  propNames,
-} from "@chakra-ui/react";
+import React from "react";
+import { Box, Text, CloseButton } from "@chakra-ui/react";
 
 import {
   WarningIcon,
@@ -18,7 +7,6 @@ import {
   CheckCircleIcon,
   WarningTwoIcon,
 } from "@chakra-ui/icons";
-import axios from "axios";
 
 function getColor(status) {
   let boxColor = ".100";
