@@ -12,6 +12,7 @@ const MovieCard = ({ href = "/", image, title, textColor }) => {
           src={image}
           borderRadius={8}
           alt={title}
+		  fallbackSrc="./blankmovie.png"
         ></Image>
         <Text
           fontSize={[14, 16]}
