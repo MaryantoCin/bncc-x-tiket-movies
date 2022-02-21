@@ -13,11 +13,14 @@ const MovieDescriptionSection = ({
     >
       <Image
         alt={movieData.title}
+		width="300"
+		height="450"
         src={
           "https://www.themoviedb.org/t/p/w300_and_h450_bestv2" +
           movieData.poster_path
         }
         borderRadius="md"
+		fallbackSrc="/blankmovie.png"
       />
       <Box
         ms={{ base: "0px", md: "40px", lg: "80px" }}
