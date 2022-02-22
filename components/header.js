@@ -46,9 +46,9 @@ export const Account = (props) => {
         showToast(
           toast,
           toastIdRef,
-          "Login gagal..",
+          "Logout gagal..",
           "Mohon coba lagi...",
-          "danger",
+          "error",
           2000,
           true
         );
