@@ -131,6 +131,12 @@ const LoginForm = (props) => {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
+		// Validation: Check if input is empty.
+		if(username === "" || password === "") {
+			handleFailedLogin("Mohon isi username dan password anda.");
+			return; // To prevent the API call from running.
+		}
+
     // Step 1: Get new token.
     api
       .get("/authentication/token/new")
